@@ -7,14 +7,14 @@ import { Search } from 'lucide-react';
 
 const HomePage = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
-      <main className="max-w-4xl mx-auto px-4 pb-20">
+    <div className="min-h-screen max-w-[1200px] mx-auto">
+      <main className="  mx-auto px-4 pb-20">
         {/* Категории */}
         <div className="flex overflow-x-auto py-4 gap-4 scrollbar-hide">
-          {['Рестораны', 'Продукты', 'Аптеки', 'Цветы', 'Кофе', 'Кондитерские'].map((category) => (
+          {['Ресторанҳо', 'Маҳсулот', 'Дорухонаҳо', 'Гулҳо', 'Қаҳва', 'Шириниҳо'].map((category) => (
             <button
               key={category}
-              className="flex-shrink-0 px-4 py-2 text-black rounded-full shadow-sm border border-gray-200 hover:border-red-400 hover:text-red-500 transition-colors"
+              className="flex-shrink-0  bg-gray-200 px-4 py-2 rounded-full shadow-sm border border-gray-200 hover:border-red-400 hover:text-red-500 transition-colors"
             >
               {category}
             </button>
@@ -24,8 +24,8 @@ const HomePage = () => {
         {/* Баннер */}
         <div className="mb-6 rounded-xl overflow-hidden shadow-md">
           <div className="bg-gradient-to-r from-red-500 to-orange-500 p-6 text-white">
-            <h2 className="text-xl font-bold mb-2">Бесплатная доставка</h2>
-            <p className="text-sm opacity-90">При заказе от 250 c до конца дня</p>
+            <h2 className="text-xl font-bold mb-2">Расонидани ройгон</h2>
+            <p className="text-sm opacity-90">Ҳангоми фармоиш аз 250 с то анҷоми рӯз</p>
           </div>
         </div>
 
@@ -48,14 +48,14 @@ const HomePage = () => {
       </main>
 
       {/* Нижнее меню */}
-      <nav className="bottom-0  bg-white border-t border-gray-200 py-2">
+      <nav className="fixed right-0 left-0 bottom-0  z-20 bg-white border-t border-gray-200 py-2">
         <div className="max-w-4xl mx-auto px-4 flex justify-around">
           {[
-            { icon: '🏠', label: 'Главная' },
-            { icon: '🔍', label: 'Поиск' },
-            { icon: '🛒', label: 'Корзина' },
-            { icon: '❤️', label: 'Избранное' },
-            { icon: '👤', label: 'Профиль' },
+            { icon: '🏠', label: 'Асосӣ' },
+            { icon: '🔍', label: 'Ҷустуҷӯ' },
+            { icon: '🛒', label: 'Сабад' },
+            { icon: '❤️', label: 'Дӯстдошташуда' },
+            { icon: '👤', label: 'Профил' },
           ].map((item) => (
             <button
               key={item.label}

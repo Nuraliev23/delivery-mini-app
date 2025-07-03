@@ -44,14 +44,14 @@ export default function ModernHeader() {
                 </div>
                 <Input
                   type="text"
-                  placeholder="Найти ресторан, блюдо или товар"
+                  placeholder="Ёфтани ресторан, таом ё мол"
                   value={searchValue}
                   onChange={(e) => setSearchValue(e.target.value)}
                   className="flex-1 pl-12 pr-4 py-3 bg-transparent border-none text-white placeholder-gray-300 focus:outline-none focus:ring-0 text-sm"
                 />
                 <Button className="group/btn relative bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-orange-500 text-gray-900 px-6 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden mr-2">
                   <span className="relative z-10 flex items-center space-x-2">
-                    <span>Найти</span>
+                    <span>Ёфтан</span>
                     <Search className="w-4 h-4 group-hover/btn:rotate-12 transition-transform duration-300" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-yellow-400 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
@@ -66,7 +66,7 @@ export default function ModernHeader() {
             <Button className="group relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 px-4 py-2 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden hidden md:flex">
               <span className="relative z-10 flex items-center space-x-2">
                 <MapPin className="w-4 h-4 group-hover:animate-bounce" />
-                <span className="text-sm">Укажите адрес доставки</span>
+                <span className="text-sm">Суроғаи расониданро нишон диҳед</span>
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Button>
@@ -79,7 +79,7 @@ export default function ModernHeader() {
               >
                 <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
                 <span className="text-sm font-medium hidden sm:block">
-                  Русский
+                Тоҷикӣ
                 </span>
               </Button>
 
@@ -88,16 +88,16 @@ export default function ModernHeader() {
                 <div className="absolute right-0 top-full mt-2 w-48 bg-white/95 backdrop-blur-xl rounded-xl border border-gray-200/50 shadow-2xl z-50 animate-fade-in-up">
                   <div className="p-2 space-y-1">
                     <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-lg transition-all duration-200 flex items-center space-x-2">
+                      <span>🇹🇯</span>
+                      <span>Тоҷикӣ</span>
+                    </button>
+                    <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-lg transition-all duration-200 flex items-center space-x-2">
                       <span>🇷🇺</span>
                       <span>Русский</span>
                     </button>
                     <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-lg transition-all duration-200 flex items-center space-x-2">
                       <span>🇺🇸</span>
                       <span>English</span>
-                    </button>
-                    <button className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-700 rounded-lg transition-all duration-200 flex items-center space-x-2">
-                      <span>🇹🇯</span>
-                      <span>Tajik</span>
                     </button>
                   </div>
                 </div>
@@ -107,7 +107,7 @@ export default function ModernHeader() {
             {/* Login Button */}
             <Button  onClick={()=>router.push('/login')} className="group flex items-center space-x-2 text-white hover:text-yellow-400 px-3 py-2 rounded-xl hover:bg-white/10 transition-all duration-300 hover:scale-105">
               <User className="w-4 h-4 group-hover:scale-110 transition-transform duration-300" />
-              <span  className="text-sm font-medium hidden sm:block">Войти</span>
+              <span  className="text-sm font-medium hidden sm:block">Ворид шудан</span>
             </Button>
 
             {/* Mobile Menu Button */}
@@ -132,7 +132,7 @@ export default function ModernHeader() {
               <Button className="w-full group relative bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-gray-900 px-4 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 overflow-hidden">
                 <span className="relative z-10 flex items-center justify-center space-x-2">
                   <MapPin className="w-4 h-4 group-hover:animate-bounce" />
-                  <span>Укажите адрес доставки</span>
+                  <span>Суроғаи расониданро нишон диҳед</span>
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-yellow-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
@@ -141,15 +141,15 @@ export default function ModernHeader() {
               <div className="flex items-center justify-between p-3 bg-white/5 rounded-xl">
                 <div className="flex items-center space-x-2 text-white">
                   <Globe className="w-4 h-4" />
-                  <span>Язык</span>
+                  <span>Забон</span>
                 </div>
-                <span className="text-yellow-400 font-medium">Русский</span>
+                <span className="text-yellow-400 font-medium">Тоҷикӣ</span>
               </div>
 
               {/* Mobile Login */}
               <Button onClick={()=>router.push('/login')} className="w-full flex items-center justify-center space-x-2 text-white hover:text-yellow-400 p-3 rounded-xl hover:bg-white/10 transition-all duration-300">
                 <User className="w-4 h-4" />
-                <span >Войти</span>
+                <span >Ворид шудан</span>
               </Button>
             </div>
           </div>
