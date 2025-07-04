@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, FreeMode } from "swiper/modules";
 import "swiper/css";
@@ -19,27 +20,37 @@ interface Flower {
 
 const FlowerSwiper = () => {
   const [flowers, setFlowers] = useState<Flower[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     fetch("https://af7bea425ac1682f.mokky.dev/flowers")
       .then((res) => res.json())
-      .then(data => setFlowers(data.map((item: Flower) => ({
-        ...item,
-        rating: Math.round(Math.random() * 20 + 30) / 10, // 3.0-5.0
-        deliveryTime: `${Math.floor(Math.random() * 30) + 15} мин`,
-        minOrder: Math.floor(Math.random() * 500) + 500
-      })))
-  )}, []);
+      .then((data) =>
+        setFlowers(
+          data.map((item: Flower) => ({
+            ...item,
+            rating: Math.round(Math.random() * 20 + 30) / 10, // 3.0-5.0
+            deliveryTime: `${Math.floor(Math.random() * 30) + 15} мин`,
+            minOrder: Math.floor(Math.random() * 500) + 500,
+          }))
+        )
+      );
+  }, []);
+
+  const handleClick = (id: number) => {
+    router.push(`/client/flowers/${id}`);
+  };
+  
 
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold">Цветочные салоны</h2>
+        <h2 className="text-xl font-bold">Салонҳои гул</h2>
         <button className="text-red-500 text-sm font-medium flex items-center">
-          Все <ChevronRight className="w-4 h-4" />
+          Ҳама <ChevronRight className="w-4 h-4" />
         </button>
       </div>
-      
+
       <Swiper
         slidesPerView={1.2}
         spaceBetween={16}
@@ -50,37 +61,40 @@ const FlowerSwiper = () => {
           480: { slidesPerView: 2.2 },
           640: { slidesPerView: 2.8 },
           768: { slidesPerView: 3.5 },
-          1024: { slidesPerView: 4.2 }
+          1024: { slidesPerView: 4.2 },
         }}
         className="!pb-8"
       >
         {flowers.map((item) => (
           <SwiperSlide key={item.id} className="!h-auto">
-            <div className="h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col">
+            <div
+              onClick={() => handleClick(item.id)}
+              className="cursor-pointer h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col group"
+            >
               <div className="relative">
                 <img
                   src={item.mainPhoto}
                   alt={item.name}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-xs px-2 py-1 rounded-lg flex items-center">
                   <Star className="w-3 h-3 fill-yellow-400 text-yellow-400 mr-1" />
                   <span className="text-xs font-semibold">{item.rating}</span>
                 </div>
               </div>
-              
+
               <div className="p-3 flex-grow flex flex-col">
                 <h3 className="font-bold text-sm mb-1 line-clamp-2">{item.name}</h3>
-                
+
                 <div className="flex items-center text-xs text-gray-500 mb-2">
                   <MapPin className="w-3 h-3 mr-1" />
                   <span>{item.city}</span>
                 </div>
-                
+
                 <div className="mt-auto pt-2 border-t border-gray-100">
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-500">{item.deliveryTime}</span>
-                    <span className="font-medium">от {item.minOrder} ₽</span>
+                    <span className="font-medium">от {item.minOrder} c</span>
                   </div>
                 </div>
               </div>

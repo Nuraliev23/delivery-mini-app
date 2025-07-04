@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { useRouter } from "next/navigation"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, FreeMode } from 'swiper/modules'
 import 'swiper/css'
@@ -21,6 +22,7 @@ const PharmacySwiper = () => {
   const [pharmacies, setPharmacies] = useState<Pharmacy[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     setLoading(true)
@@ -41,6 +43,10 @@ const PharmacySwiper = () => {
       .finally(() => setLoading(false))
   }, [])
 
+  const handleClick = (id: number) => {
+    router.push(`/client/pharmacies/${id}`)
+  }
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-40">
@@ -60,9 +66,9 @@ const PharmacySwiper = () => {
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4 px-4">
-        <h2 className="text-xl font-bold">Аптеки рядом</h2>
+        <h2 className="text-xl font-bold">Дорухонаҳои наздик</h2>
         <button className="text-red-500 text-sm font-medium flex items-center">
-          Все <ChevronRight className="w-4 h-4" />
+          Ҳама <ChevronRight className="w-4 h-4" />
         </button>
       </div>
       
@@ -82,12 +88,15 @@ const PharmacySwiper = () => {
       >
         {pharmacies.map((pharmacy) => (
           <SwiperSlide key={pharmacy.id} className="!h-auto">
-            <div className="h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col">
+            <div
+              onClick={() => handleClick(pharmacy.id)}
+              className="cursor-pointer h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col group"
+            >
               <div className="relative">
                 <img
                   src={pharmacy.mainPhoto}
                   alt={pharmacy.name}
-                  className="w-full h-40 object-cover"
+                  className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute top-2 left-2 flex gap-2">
                   <div className="bg-white/90 backdrop-blur-xs px-2 py-1 rounded-lg flex items-center">

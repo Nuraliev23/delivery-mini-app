@@ -1,5 +1,7 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation, FreeMode } from 'swiper/modules'
 import 'swiper/css'
@@ -22,6 +24,7 @@ const RestaurantSwiper = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const router = useRouter()
 
   useEffect(() => {
     setLoading(true)
@@ -33,15 +36,19 @@ const RestaurantSwiper = () => {
       .then(data => {
         setRestaurants(data.map((item: Restaurant) => ({
           ...item,
-          rating: (Math.random() * 2 + 3).toFixed(1), // Рейтинг 3.0-5.0
+          rating: (Math.random() * 2 + 3).toFixed(1), // Рейтинг от 3.0 до 5.0
           deliveryTime: `${Math.floor(Math.random() * 30) + 15}-${Math.floor(Math.random() * 30) + 45} мин`,
           minOrder: Math.floor(Math.random() * 500) + 500,
-          isPromoted: Math.random() > 0.8 // 20% chance
+          isPromoted: Math.random() > 0.8 // 20% вероятность акции
         })))
       })
       .catch(err => setError(err.message))
       .finally(() => setLoading(false))
   }, [])
+
+  const handleCardClick = (id: number) => {
+    router.push(`/client/restaurants/${id}`)
+  }
 
   if (loading) {
     return (
@@ -62,12 +69,12 @@ const RestaurantSwiper = () => {
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4 px-4">
-        <h2 className="text-xl font-bold">Рестораны и кафе</h2>
+        <h2 className="text-xl font-bold">Тарабхонаҳо ва қаҳвахонаҳо</h2>
         <button className="text-red-500 text-sm font-medium flex items-center">
-          Все <ChevronRight className="w-4 h-4" />
+          Ҳама <ChevronRight className="w-4 h-4" />
         </button>
       </div>
-      
+
       <Swiper
         slidesPerView={1.2}
         spaceBetween={16}
@@ -84,7 +91,10 @@ const RestaurantSwiper = () => {
       >
         {restaurants.map((restaurant) => (
           <SwiperSlide key={restaurant.id} className="!h-auto">
-            <div className="h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col group">
+            <div
+              onClick={() => handleCardClick(restaurant.id)}
+              className="cursor-pointer h-full rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-200 border border-gray-100 bg-white flex flex-col group"
+            >
               <div className="relative">
                 <img
                   src={restaurant.mainPhoto}
@@ -107,22 +117,22 @@ const RestaurantSwiper = () => {
                   <Heart className="w-4 h-4" />
                 </button>
               </div>
-              
+
               <div className="p-3 flex-grow flex flex-col">
                 <h3 className="font-bold text-sm mb-1 line-clamp-2">{restaurant.name}</h3>
-                
+
                 <div className="flex items-center text-xs text-gray-500 mb-2">
                   <MapPin className="w-3 h-3 mr-1" />
                   <span>{restaurant.city}</span>
                 </div>
-                
+
                 <div className="mt-auto pt-2 border-t border-gray-100">
                   <div className="flex justify-between text-xs">
                     <span className="text-gray-500 flex items-center">
                       <Clock className="w-3 h-3 mr-1" />
                       {restaurant.deliveryTime}
                     </span>
-                    <span className="font-medium">от {restaurant.minOrder} ₽</span>
+                    <span className="font-medium">от {restaurant.minOrder} c</span>
                   </div>
                 </div>
               </div>
