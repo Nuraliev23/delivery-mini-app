@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import { Star, MapPin, ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
 interface Flower {
   id: number;
@@ -40,15 +41,14 @@ const FlowerSwiper = () => {
   const handleClick = (id: number) => {
     router.push(`/client/flowers/${id}`);
   };
-  
 
   return (
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold">Салонҳои гул</h2>
-        <button className="text-red-500 text-sm font-medium flex items-center">
-          Ҳама <ChevronRight className="w-4 h-4" />
-        </button>
+        <Button className="cursor-pointer" onClick={() => router.push(`/client/orders/`)}>
+          Сабти фармоиш
+        </Button>
       </div>
 
       <Swiper
@@ -84,7 +84,9 @@ const FlowerSwiper = () => {
               </div>
 
               <div className="p-3 flex-grow flex flex-col">
-                <h3 className="font-bold text-sm mb-1 line-clamp-2">{item.name}</h3>
+                <h3 className="font-bold text-sm mb-1 line-clamp-2">
+                  {item.name}
+                </h3>
 
                 <div className="flex items-center text-xs text-gray-500 mb-2">
                   <MapPin className="w-3 h-3 mr-1" />

@@ -7,6 +7,7 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/free-mode'
 import { Star, MapPin, ChevronRight, Clock, Cross, Loader2 } from 'lucide-react'
+import { Button } from '../ui/button'
 
 interface Pharmacy {
   id: number
@@ -67,9 +68,8 @@ const PharmacySwiper = () => {
     <section className="mb-8">
       <div className="flex items-center justify-between mb-4 px-4">
         <h2 className="text-xl font-bold">Дорухонаҳои наздик</h2>
-        <button className="text-red-500 text-sm font-medium flex items-center">
-          Ҳама <ChevronRight className="w-4 h-4" />
-        </button>
+           <Button  className="cursor-pointer" onClick={()=>    router.push(`/client/orders/`)}>Сабти фармоиш</Button>
+   
       </div>
       
       <Swiper
